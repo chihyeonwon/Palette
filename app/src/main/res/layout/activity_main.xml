@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,129 +10,47 @@
         android:id="@+id/tv_minute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00"
-        android:textSize="70sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_second"
-        app:layout_constraintEnd_toStartOf="@+id/tv_second"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:layout_centerInParent="true"
+        android:layout_marginRight="20dp"
+        android:text="05"
+        android:textSize="100sp" />
 
     <TextView
         android:id="@+id/tv_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="100sp"
         android:text=":00"
-        android:textSize="70sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_refresh"
-        app:layout_constraintEnd_toStartOf="@+id/tv_millisecond"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_minute"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:layout_toRightOf="@id/tv_minute"
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/tv_millisecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="50sp"
         android:text=".00"
-        android:textSize="55sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_second"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_second"
-        tools:ignore="MissingConstraints" />
+        android:layout_toRightOf="@id/tv_second"
+        android:layout_centerVertical="true"/>
 
     <Button
-        android:id="@+id/btn_refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:backgroundTint="@color/yellow"
-        android:text="@string/refresh"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btn_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
-        android:text="@string/start"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/minute1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="1분크로키"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginRight="80dp"
-        android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_start"
-        app:layout_constraintVertical_bias="0.501"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/minute3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="3분크로키"
-        android:textColor="@color/white"
+        android:text="시작"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_start"
-        app:layout_constraintVertical_bias="0.501"
-        tools:ignore="MissingConstraints" />
+        android:layout_below="@id/tv_second"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/minute5"
+    <Button
+        android:id="@+id/btn_reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="5분크로키"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="80dp"
-        android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.854"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_start"
-        app:layout_constraintVertical_bias="0.502"
-        tools:ignore="MissingConstraints" />
+        android:text="초기화"
+        android:textSize="20sp"
+        android:layout_below="@id/btn_start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -1,104 +1,100 @@
 package com.example.palette
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.os.CountDownTimer
 import android.widget.Button
 import android.widget.TextView
-import java.util.Timer
-import kotlin.concurrent.timer
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
+    private var countdown_timer: CountDownTimer? = null
+    private var time_in_milliseconds: Long = 300000
+    private var is_running = false
 
-    private lateinit var btn_start: Button
-    private lateinit var btn_refresh: Button
-    private lateinit var tv_millisecond: TextView
-    private lateinit var tv_second: TextView
-    private lateinit var tv_minute: TextView
+    private lateinit var start_btn : Button
+    private lateinit var reset_btn : Button
 
-    var isRunning = false
-    var timer : Timer? = null
-    var time = 0
+    private lateinit var tv_millisecond : TextView
+    private lateinit var tv_second : TextView
+    private lateinit var tv_minute : TextView
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_start = findViewById(R.id.btn_start)
-        btn_refresh = findViewById(R.id.btn_refresh)
-        tv_millisecond = findViewById(R.id.tv_millisecond)
-        tv_second = findViewById(R.id.tv_second)
         tv_minute = findViewById(R.id.tv_minute)
+        tv_second = findViewById(R.id.tv_second)
+        tv_millisecond = findViewById(R.id.tv_millisecond)
 
-        btn_start.setOnClickListener(this)
-        btn_refresh.setOnClickListener(this)
+        set_minute_5()
 
-    }
+        start_btn = findViewById(R.id.btn_start)
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btn_start -> {
-                if (isRunning) {
-                    pause()
-                } else {
-                    start()
-                }
+        reset_btn = findViewById(R.id.btn_reset)
+
+
+        start_btn.setOnClickListener {
+            if (is_running) {
+                pause_timer()
+            } else {
+                start_timer()
             }
+        }
 
-            R.id.btn_refresh -> {
-                refresh()
-            }
+        findViewById<Button>(R.id.btn_reset).setOnClickListener {
+            reset_timer()
         }
     }
 
-    // 스탑워치 시작
-    private fun start() {
-        btn_start.text = "일시정지"
-        btn_start.setBackgroundColor(getColor(R.color.red))
-        isRunning = true
-
-        // 백그라운드 스레드에서만 실행
-        timer = timer(period = 10) {
-            time++
-
-            val millis = time * 10
-            val total_seconds = millis / 1000
-            val minute = total_seconds / 60
-            val second = total_seconds % 60
-            val milli_second = millis % 100
-
-            runOnUiThread {
-                if (isRunning) {
-                    tv_millisecond.text =
-                        if (milli_second < 10) "0${milli_second}" else ".${milli_second}"
-                    tv_second.text = if (second < 10) ":0${second}" else ":${second}"
-                    tv_minute.text = "${minute}"
-                }
+    private fun start_timer() {
+        countdown_timer = object : CountDownTimer(time_in_milliseconds, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                time_in_milliseconds = millisUntilFinished
+                update_timer_text()
             }
 
-        }
+            override fun onFinish() {
+                is_running = false
+                set_minute_5()
+                start_btn.text = "시작"
+                start_btn.setBackgroundColor(getColor(R.color.blue))
+            }
+        }.start()
 
+        is_running = true
+        start_btn.text = "일시정지"
+        start_btn.setBackgroundColor(getColor(R.color.red))
     }
-    private fun pause() {
-        btn_start.text = "시작"
-        btn_start.setBackgroundColor(getColor(R.color.blue))
 
-        isRunning = false
-        timer?.cancel()
+    private fun pause_timer() {
+        countdown_timer?.cancel()
+        is_running = false
+        start_btn.text = "시작"
+        start_btn.setBackgroundColor(getColor(R.color.blue))
     }
-    private fun refresh() {
-        timer?.cancel()
 
-        btn_start.text = "시작"
-        btn_start.setBackgroundColor(getColor(R.color.blue))
-        isRunning = false
+    private fun reset_timer() {
+        countdown_timer?.cancel()
+        is_running = false
+        time_in_milliseconds = 300000
+        set_minute_5()
+        start_btn.text = "시작"
+        start_btn.setBackgroundColor(getColor(R.color.blue))
+    }
 
-        time = 0
-        tv_millisecond.text = ".00"
+    private fun update_timer_text() {
+        val minutes = (time_in_milliseconds / 1000) / 60
+        val seconds = (time_in_milliseconds / 1000) % 60
+        val milliseconds = (time_in_milliseconds % 1000) / 10
+
+        tv_minute.text = if (minutes < 10) "0$minutes" else "$minutes"
+        tv_second.text = if (seconds < 10) ":0$seconds" else ":$seconds"
+        tv_millisecond.text = if (milliseconds < 10) ".0$milliseconds" else ".$milliseconds"
+    }
+
+    private fun set_minute_5() {
+        tv_minute.text = "05"
         tv_second.text = ":00"
-        tv_minute.text = "00"
+        tv_millisecond.text = ".00"
     }
-
 }
