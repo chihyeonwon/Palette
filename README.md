@@ -5,6 +5,9 @@
 개발의도 : 1분 3분 5분 시간 설정 버튼을 클릭하면 스탑워치의 시간이 설정한 시간에 맞게 초기화되며
 시간이 줄어들다가 0분 0초가 되면 설정한 벨소리의 알림을 울리게 한다.
 ```
+## Splash 화면
+![image](https://github.com/mr-won/Palette/assets/58906858/6770e834-4686-40db-b4de-2c38036f6e4a)
+
 ## 화면 UI 구성
 ![image](https://github.com/mr-won/Palette/assets/58906858/3c9d30e8-51cf-4c08-a917-d20f70253f29)
 
