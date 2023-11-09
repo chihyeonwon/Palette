@@ -7,3 +7,17 @@
 ```
 ## 화면 UI 구성
 ![image](https://github.com/mr-won/Palette/assets/58906858/3c9d30e8-51cf-4c08-a917-d20f70253f29)
+
+## 화면 UI 변경
+![image](https://github.com/mr-won/Palette/assets/58906858/8a11b2af-2fb0-4e7f-bc7f-5758184ee22a)
+
+## 1분 크로키
+![image](https://github.com/mr-won/Palette/assets/58906858/9ae462dc-639e-4bc2-827f-286cd519ff3f)
+
+## 3분 크로키
+![image](https://github.com/mr-won/Palette/assets/58906858/673fa0fd-0eb7-49d6-a075-3303f93d8af3)
+
+## 5분 크로키
+![image](https://github.com/mr-won/Palette/assets/58906858/0544364d-b5d6-4511-9893-92c00d3b23fd)
+
+## 0분 0초가 되었을 때 알림 기능
