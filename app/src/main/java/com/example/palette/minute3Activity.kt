@@ -1,5 +1,6 @@
 package com.example.palette
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Button
@@ -16,6 +17,8 @@ class minute3Activity : AppCompatActivity() {
 
     private lateinit var tv_second : TextView
     private lateinit var tv_minute : TextView
+
+    private val TAG = minute3Activity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,26 @@ class minute3Activity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btn_reset).setOnClickListener {
             reset_timer()
+        }
+
+        if(tv_minute.text == "00" && tv_second.text==":00") {
+            // 시스템 소리
+            /* // 소리 얻기
+             val sound : Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+             // 소리 담기
+             val ringtone = RingtoneManager.getRingtone(applicationContext, sound)
+
+             // 실행
+             ringtone.play()*/
+
+            // 사용자 정의
+
+            // 소리 얻기
+            val player: MediaPlayer = MediaPlayer.create(this, R.raw.tiny_button_push_sound)
+
+            // 실행
+            player.start()
         }
     }
 
