@@ -47,23 +47,7 @@ class minute3Activity : AppCompatActivity() {
         }
 
         if(tv_minute.text == "00" && tv_second.text==":00") {
-            // 시스템 소리
-            /* // 소리 얻기
-             val sound : Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
-             // 소리 담기
-             val ringtone = RingtoneManager.getRingtone(applicationContext, sound)
-
-             // 실행
-             ringtone.play()*/
-
-            // 사용자 정의
-
-            // 소리 얻기
-            val player: MediaPlayer = MediaPlayer.create(this, R.raw.tiny_button_push_sound)
-
-            // 실행
-            player.start()
+            ringPlay()
         }
     }
 
@@ -115,5 +99,25 @@ class minute3Activity : AppCompatActivity() {
     private fun set_minute_3() {
         tv_minute.text = "03"
         tv_second.text = ":00"
+    }
+
+    private fun ringPlay() {
+        // 시스템 소리
+        /* // 소리 얻기
+         val sound : Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+         // 소리 담기
+         val ringtone = RingtoneManager.getRingtone(applicationContext, sound)
+
+         // 실행
+         ringtone.play()*/
+
+        // 사용자 정의
+
+        // 소리 얻기
+        val player: MediaPlayer = MediaPlayer.create(this, R.raw.tiny_button_push_sound)
+
+        // 실행
+        player.start()
     }
 }
