@@ -5,6 +5,10 @@
 개발의도 : 1분 3분 5분 시간 설정 버튼을 클릭하면 스탑워치의 시간이 설정한 시간에 맞게 초기화되며
 시간이 줄어들다가 0분 0초가 되면 설정한 벨소리의 알림을 울리게 한다.
 ```
+## 구글플레이스토어 앱 배포
+[앱 번들 생성 방법](https://devshin93.tistory.com/141)   
+![image](https://github.com/mr-won/Palette/assets/58906858/731a1f27-ae92-43b9-bc18-15a0943abb43)
+
 ## Splash 화면
 ![image](https://github.com/mr-won/Palette/assets/58906858/6770e834-4686-40db-b4de-2c38036f6e4a)
 
