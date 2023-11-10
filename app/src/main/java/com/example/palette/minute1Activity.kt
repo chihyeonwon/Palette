@@ -1,15 +1,22 @@
 package com.example.palette
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
+import android.os.Build
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 
 class minute1Activity : AppCompatActivity() {
     private var countdown_timer: CountDownTimer? = null
@@ -24,6 +31,10 @@ class minute1Activity : AppCompatActivity() {
 
     private val TAG = minute1Activity::class.java.simpleName
 
+    // Noti 객체 생성
+    private lateinit var notificationHelper: NotificationHelper
+
+    @RequiresApi(VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_minute1)
@@ -37,6 +48,13 @@ class minute1Activity : AppCompatActivity() {
 
         reset_btn = findViewById(R.id.btn_reset)
 
+        /*// 객체 생성
+        val titleEdit: EditText = findViewById(R.id.title_edit)
+        val messageEdit: EditText = findViewById(R.id.message_edit)
+        val notiBtn: Button = findViewById(R.id.noti_btn)
+*/
+        // Noti 초기화
+        notificationHelper = NotificationHelper(this)
 
         start_btn.setOnClickListener {
             if (is_running) {
@@ -49,10 +67,6 @@ class minute1Activity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_reset).setOnClickListener {
             reset_timer()
         }
-
-        if(tv_minute.text == "00" && tv_second.text==":00") {
-           ringPlay()
-        }
     }
 
     private fun start_timer() {
@@ -64,7 +78,8 @@ class minute1Activity : AppCompatActivity() {
 
             override fun onFinish() {
                 is_running = false
-                set_minute_1()
+                ringPlay()
+                notiPlay()
                 start_btn.text = "시작"
                 start_btn.setBackgroundColor(getColor(R.color.blue))
             }
@@ -94,7 +109,6 @@ class minute1Activity : AppCompatActivity() {
     private fun update_timer_text() {
         val minutes = (time_in_milliseconds / 1000) / 60
         val seconds = (time_in_milliseconds / 1000) % 60
-        val milliseconds = (time_in_milliseconds % 1000) / 10
 
         tv_minute.text = if (minutes < 10) "0$minutes" else "$minutes"
         tv_second.text = if (seconds < 10) ":0$seconds" else ":$seconds"
@@ -102,6 +116,11 @@ class minute1Activity : AppCompatActivity() {
 
     private fun set_minute_1() {
         tv_minute.text = "01"
+        tv_second.text = ":00"
+    }
+
+    private fun set_minute_0() {
+        tv_minute.text = "00"
         tv_second.text = ":00"
     }
 
@@ -123,6 +142,41 @@ class minute1Activity : AppCompatActivity() {
 
         // 실행
         player.start()
+    }
+
+    @RequiresApi(VERSION_CODES.O)
+    @SuppressLint("ServiceCast")
+    private fun vibratorPlay() {
+
+        val vibrator = getSystemService(VIBRATOR_MANAGER_SERVICE) as Vibrator
+
+        // 버전 오레오, 그 이상(안드로이드 8)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // 진동시간, 세기 설정(0.5초, 기본세기)
+            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            // 0.5초 동안 울린다.
+            vibrator.vibrate(500)
+        }
+    }
+
+    private fun notiPlay() {
+        /*val title: String = titleEdit.text.toString()
+        val message: String = messageEdit.text.toString()*/
+        
+        val title = "1분 크로키"
+        val message = "종료"
+
+        // 알림 호출
+        showNotification(title, message)
+    }
+
+    // 알림 호출
+    private fun showNotification(title:String, message:String) {
+        val nb: NotificationCompat.Builder =
+            notificationHelper.getChannelNotification(title,message)
+
+        notificationHelper.getManager().notify(1, nb.build())
     }
 
 }
