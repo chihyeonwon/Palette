@@ -6,7 +6,9 @@
 시간이 줄어들다가 0분 0초가 되면 설정한 벨소리의 알림을 울리게 한다.
 ```
 ## 구글플레이스토어 앱 배포
-[앱 번들 생성 방법](https://devshin93.tistory.com/141)   
+[앱 번들 생성 방법](https://devshin93.tistory.com/141)         
+[구글플레이스토어 앱 링크](https://play.google.com/store/apps/details?id=com.wonchihyeon.palette)
+![image](https://github.com/mr-won/Palette/assets/58906858/d5d410b7-9007-43bc-a135-da150de759e5)
 ![image](https://github.com/mr-won/Palette/assets/58906858/731a1f27-ae92-43b9-bc18-15a0943abb43)
 
 ## Splash 화면
